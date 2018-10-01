@@ -1,0 +1,22 @@
+CUSTOMER_ID,ACCOUNT_ID,ACCOUNT_TYPE,MAIN_BALANCE,DATE_CREATED
+C001R,CA7300877646IN,C,11000.0,2018-08-28 10:52:35
+C004R,SA108772323351IN,S,48000.0,2018-08-28 11:02:03
+C006R,SA108772323353IN,S,6000.0,2018-08-29 21:30:13
+
+
+SELECT cust.customer_id,cust.first_name,cust.last_name,lsum.loanAmount,fsum.fdAmount FROM CUSTOMERS cust JOIN(SELECT customer_id,SUM(amount) AS fdAmount FROM FD_ACCOUNTS GROUP BY customer_id) fsum ON cust.customer_id = fsum.customer_id JOIN(SELECT customer_id,SUM(amount) AS loanAmount FROM DATA GROUP BY customer_id) lsum ON cust.customer_id = lsum.customer_id WHERE lsum.loanAmount > fsum.fdAmount;
+
+SELECT cust.customer_id,cust.first_name,cust.last_name,loanAmount FROM CUSTOMERS cust JOIN(SELECT customer_id FROM ACCOUNTS) id ON cust.customer_id = id.customer_id JOIN(SELECT savings_acc_id,SUM(amount) AS loanAmount FROM LOAN_ACCOUNTS GROUP BY id.customer_id) lsum ON savings_acc_id = account_id;
+
+
+
+SELECT customer_id,first_name,last_name FROM CUSTOMERS WHERE customer_id IN (SELECT customer_id FROM CUSTOMERS MINUS SELECT customer_id FROM FD_ACCOUNTS);
+
+SELECT customer_id,first_name,last_name FROM CUSTOMERS WHERE customer_id IN (SELECT customer_id FROM CUSTOMERS MINUS SELECT customer_id FROM ACCOUNTS INNER JOIN LOAN_ACCOUNTS ON LOAN_ACCOUNTS.savings_acc_id = ACCOUNTS.account_id);
+
+SELECT customer_id,first_name,last_name FROM CUSTOMERS WHERE customer_id IN (SELECT customer_id FROM CUSTOMERS MINUS (SELECT customer_id FROM FD_ACCOUNTS UNION SELECT customer_id FROM ACCOUNTS INNER JOIN LOAN_ACCOUNTS ON LOAN_ACCOUNTS.savings_acc_id = ACCOUNTS.account_id)); 
+
+SELECT cust.customer_id,cust.first_name,cust.last_name,loan.amount FROM LOAN_ACCOUNTS loan INNER JOIN ACCOUNTS acc ON acc.account_id = loan.savings_acc_id INNER JOIN CUSTOMERS cust ON cust.customer_id = acc.customer_id WHERE loan.amount > 1000;
+
+CREATE VIEW DATA AS SELECT cust.customer_id,cust.first_name,cust.last_name,amount FROM LOAN_ACCOUNTS loan INNER JOIN ACCOUNTS acc ON acc.account_id = loan.savings_acc_id INNER JOIN CUSTOMERS cust ON cust.customer_id = acc.customer_id; 
+SELECT cust.customer_id,cust.first_name,cust.last_name,lsum.loanAmount FROM CUSTOMERS cust JOIN(SELECT customer_id,SUM(amount) AS loanAmount FROM DATA GROUP BY customer_id) lsum ON cust.customer_id = lsum.customer_id;

@@ -1,0 +1,8 @@
+CUSTOMER_ID,FIRST_NAME,LAST_NAME,ADDRESS_LINE1,ADDRESS_LINE2,CITY,STATE,PINCODE,STATUS,DATE_OF_SIGN_UP
+C001R,Adarsh,M S,aaaaaaaa,aaaaaaaaaaa,aaaaaaaa,aaaaaaaaa,123456,A,2018-08-28 10:52:35
+C002R,Adith,M S,aaaaaaa,aaaaaaaaaaa,sdddddddddd,aaaaaaa,123456,A,2018-08-28 10:56:05
+C003R,Ada,ms,aaaaaaa,aaaaaaaaaa,aaaaaaa,aaaaaaaa,123456,A,2018-08-28 11:00:48
+C004R,aaaaaaa,aaaaaaa,aaaaaaaaaa,aaaaaaaaaa,aaaaaaaa,aaaaaaaa,123456,L,2018-08-28 11:02:03
+C005R,addddddd,dddddddddd,ddddddddddd,dddddddddd,ddddddddd,ddddddddd,123456,A,2018-08-28 11:06:02
+C006R,Scoobee,J S,aaaaaaaaaaaaaa,aaaaaaaaaaa,aaaaaaaaa,aaaaaaaaaa,123456,L,2018-08-29 21:30:13
+C007R,aaaaaaaa,aaaaaaaaaaaaaaa,aaaaaaaaaaaaaaaa,aaaaaaaaaaa,aaaaaaaa,aaaaaaaaaaa,123456,A,2018-08-29 23:01:34
